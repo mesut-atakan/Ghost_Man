@@ -1,18 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using Character;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+
+
+internal class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+#region ||~~~~~~~~~~|| X ||~~~~~~~~~~|| SERIALIZE FIELDS ||~~~~~~~~~~|| X ||~~~~~~~~~~||
+
+    [Header("Classes")]
+
+    [Tooltip("Get Player Controller Class")]
+    [SerializeField] private PlayerController playerController;
+
+    [Tooltip("Maps All Enemys")]
+    [SerializeField] private EnemyAI[] allEnemys;
+
+#endregion ||~~~~~~~~~~|| X ||~~~~~~~~~~|| XXXX ||~~~~~~~~~~|| X ||~~~~~~~~~~||
+
+
+
+
+
+    private void Update() {
+        playerController.Attack(null);
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate() 
     {
-        
+        // ~~ Player
+        playerController.Move();
+        playerController.Jump();
+
+        // ~~ ENEMY 
+
+        EnemyController();
+    }
+
+
+
+
+
+    /// <summary>
+    /// All enemies on the map will be able to move with this function!
+    /// </summary>
+    private void EnemyController()
+    {
+        foreach(EnemyAI enemy in this.allEnemys)
+        {
+            enemy.Move();
+        }
     }
 }

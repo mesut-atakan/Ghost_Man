@@ -41,7 +41,6 @@ namespace Character
 
             _playerDistance = this.transform.position.x - this.playerTransform.position.x;
             _playerDirection = HowPLayerDirection(_playerDistance);
-            Debug.Log($"Player Distance: {_playerDistance}\nPlayer Direction: {_playerDirection}");
 
             _playerDistance = Mathf.Abs(_playerDistance);
 
